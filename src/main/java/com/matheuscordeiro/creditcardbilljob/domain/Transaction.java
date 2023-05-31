@@ -6,7 +6,7 @@ public class Transaction {
 	private int id;
 	private String description;
 	private Double value;
-	private String creditCard;
+	private CreditCard creditCard;
 	private Date date;
 	
 	public int getId() {
@@ -27,10 +27,10 @@ public class Transaction {
 	public void setValue(Double value) {
 		this.value = value;
 	}
-	public String getCreditCard() {
+	public CreditCard getCreditCard() {
 		return creditCard;
 	}
-	public void setCreditCard(String creditCard) {
+	public void setCreditCard(CreditCard creditCard) {
 		this.creditCard = creditCard;
 	}
 	public Date getDate() {
