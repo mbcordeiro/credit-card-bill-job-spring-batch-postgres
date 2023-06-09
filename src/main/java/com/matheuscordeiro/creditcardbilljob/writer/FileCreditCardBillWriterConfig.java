@@ -42,6 +42,7 @@ public class FileCreditCardBillWriterConfig {
 				.build();
 	}
 
+	@Bean
 	private FlatFileFooterCallback footerCallback() {
 		return new TotalTransactionFooterCallback();
 	}
