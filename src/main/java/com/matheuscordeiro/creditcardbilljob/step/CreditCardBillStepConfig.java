@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import com.matheuscordeiro.creditcardbilljob.domain.CreditCardBill;
 import com.matheuscordeiro.creditcardbilljob.domain.Transaction;
 import com.matheuscordeiro.creditcardbilljob.reader.CreditCardBillReader;
+import com.matheuscordeiro.creditcardbilljob.writer.TotalTransactionFooterCallback;
 
 @Configuration
 public class CreditCardBillStepConfig {
@@ -21,11 +22,13 @@ public class CreditCardBillStepConfig {
 	@Bean
 	public Step creditCardBillStep(ItemStreamReader<Transaction> readTransactionItemReader,
 			ItemProcessor<CreditCardBill, CreditCardBill> creditCardBillItemProcessor,
-			ItemWriter<CreditCardBill> creditCardBillItemWriter) {
+			ItemWriter<CreditCardBill> creditCardBillItemWriter, 
+			TotalTransactionFooterCallback footerCallback) {
 		return stepBuilderFactory.get("creditCardBillStep").<CreditCardBill, CreditCardBill>chunk(1)
 				.reader(new CreditCardBillReader(readTransactionItemReader))
 				.processor(creditCardBillItemProcessor)
 				.writer(creditCardBillItemWriter)
+				.listener(footerCallback)
 				.build();
 	}
 }

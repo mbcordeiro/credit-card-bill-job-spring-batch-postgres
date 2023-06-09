@@ -26,6 +26,8 @@ public class CreditCardBill {
 	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}
-	
+	public Double getTotal() {
+		return transactions.stream().mapToDouble(Transaction::getValue).reduce(0.0, Double::sum);
+	}
 	
 }
